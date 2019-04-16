@@ -1,0 +1,20 @@
+// Copyright (C) king.com Ltd 2019
+// https://github.com/king/results-cache-service
+// License: Apache 2.0, https://raw.githubusercontent.com/king/results-cache-service/master/LICENSE-APACHE
+
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+
+    idea {
+        module {
+            excludeDirs += file('.idea')
+            excludeDirs += file('.settings')
+            excludeDirs += file('logs')
+            excludeDirs += file('bin')
+            excludeDirs += file('build')
+
+            downloadSources = true
+        }
+    }
+}

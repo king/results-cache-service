@@ -1,0 +1,50 @@
+// Copyright (C) king.com Ltd 2019
+// https://github.com/king/results-cache-service
+// License: Apache 2.0, https://raw.githubusercontent.com/king/results-cache-service/master/LICENSE-APACHE
+
+plugins {
+    id 'java'
+    id 'com.gradle.build-scan' version '1.16'
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+}
+
+ext {
+    gradleExtensions = "${rootProject.projectDir}/gradle"
+
+    versions = [
+            gradle   : '4.10',
+            junit    : '4.12',
+            hamcrest : '1.3',
+            logback  : '1.2.3',
+            ehcache  : '3.5.2',
+            swagger  : '2.8.0',
+            boot     : '2.0.5.RELEASE',
+            spring   : '5.1.0.RELEASE'
+    ]
+}
+
+apply from: "${gradleExtensions}/repositories.gradle"
+apply from: "${gradleExtensions}/spring-boot.gradle"
+apply from: "${gradleExtensions}/ide.gradle"
+apply from: "${gradleExtensions}/java.gradle"
+
+wrapper {
+    gradleVersion = versions.gradle
+}
+
+configurations.all {
+    // Check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-dependencies:${versions.boot}"
+
+    implementation "org.ehcache:ehcache:${versions.ehcache}"
+
+    implementation "ch.qos.logback:logback-classic:${versions.logback}"
+    implementation "ch.qos.logback:logback-core:${versions.logback}"
+
+    implementation "io.springfox:springfox-swagger2:${versions.swagger}"
+    implementation "io.springfox:springfox-swagger-ui:${versions.swagger}"
+}
