@@ -11,7 +11,7 @@ Implemented API
 
 Latest release
 --------------
-1.0.0 - Basic implementation of the API using EHCache and SpringBoot
+1.0.1 - Basic implementation of the API using EHCache and SpringBoot
 
 How to build
 ------------
@@ -20,4 +20,4 @@ How to build
 How to execute it
 -----------------
 * using gradle: `./gradlew bootRun`
-* using built jar file: `java -jar ./build/libs/results-cache-service-1.0.0.jar`
+* using built jar file: `java -jar ./build/libs/results-cache-service-<release>.jar`
