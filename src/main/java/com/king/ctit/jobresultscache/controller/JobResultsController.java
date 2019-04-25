@@ -45,11 +45,11 @@ public class JobResultsController {
      */
     @ApiOperation("Gets a cached result from the cache")
     @GetMapping(value = "/{hash}", produces = MediaType.TEXT_PLAIN_VALUE)
-    public @ResponseBody JobResult getCachedResult(@ApiParam(value = "Job hash", required = true) @PathVariable("hash") String hash) {
+    public @ResponseBody String getCachedResult(@ApiParam(value = "Job hash", required = true) @PathVariable("hash") String hash) {
         logger.debug("Asking for hash: {}", hash);
         JobResult result = service.getJobResult(hash);
         logger.debug("Result for hash: {} is {}", hash, result);
-        return result;
+        return result.name();
     }
 
     /**
