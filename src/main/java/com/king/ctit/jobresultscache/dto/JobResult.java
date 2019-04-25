@@ -4,13 +4,10 @@
 
 package com.king.ctit.jobresultscache.dto;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 /**
  * Job result values
  * @see <a href="https://javadoc.jenkins-ci.org/hudson/model/Result.html">hudson.model.Result</a>
  */
 public enum JobResult {
-    SUCCESS, UNSTABLE, FAILURE, NOT_BUILT, ABORTED
+    SUCCESS, UNSTABLE, FAILURE, NOT_BUILT, ABORTED;
 }
