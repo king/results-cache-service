@@ -4,10 +4,31 @@
 
 package com.king.ctit.jobresultscache.dto;
 
-/**
- * Job result values
- * @see <a href="https://javadoc.jenkins-ci.org/hudson/model/Result.html">hudson.model.Result</a>
- */
-public enum JobResult {
-    SUCCESS, UNSTABLE, FAILURE, NOT_BUILT, ABORTED;
+import java.io.Serializable;
+
+public class JobResult implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    public static final JobResult EMPTY_RESULT = new JobResult(Result.NOT_BUILT, -1);
+
+    private Result result;
+    private Integer build;
+
+    private JobResult() {}
+
+    public JobResult(Result result, Integer build) {
+        this.result = result == null ? Result.NOT_BUILT : result;
+        this.build = build == null ? -1 : build;
+    }
+
+    public Result getResult() { return result; }
+    public Integer getBuild() { return build; }
+
+    @Override
+    public String toString() {
+        return "JobResult{" +
+                "result=" + result +
+                ", build=" + build +
+                '}';
+    }
 }

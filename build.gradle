@@ -1,18 +1,19 @@
+import org.codehaus.groovy.runtime.GStringImpl
+
 // Copyright (C) king.com Ltd 2019
 // https://github.com/king/results-cache-service
 // License: Apache 2.0, https://raw.githubusercontent.com/king/results-cache-service/master/LICENSE-APACHE
 
 plugins {
     id 'java'
-    id 'com.gradle.build-scan' version '1.16'
     id 'org.springframework.boot' version '2.0.5.RELEASE'
 }
 
 ext {
-    gradleExtensions = "${rootProject.projectDir}/gradle"
+    gradleExtensions = "${rootProject.projectDir}/gradle" as GStringImpl
 
     versions = [
-            gradle   : '4.10',
+            gradle   : '6.8',
             junit    : '4.12',
             hamcrest : '1.3',
             logback  : '1.2.3',
