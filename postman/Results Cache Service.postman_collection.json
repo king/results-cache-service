@@ -6,51 +6,102 @@
 	},
 	"item": [
 		{
-			"name": "Post new job result",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"result\": \"SUCCESS\", \"build\": 10}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "v1",
+			"item": [
+				{
+					"name": "Post new job result",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/job-results/123456789/SUCCESS",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"job-results",
+								"123456789",
+								"SUCCESS"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/job-results/123456789",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"job-results",
-						"123456789"
-					]
+				{
+					"name": "Get job result",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/job-results/123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"job-results",
+								"123456789"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Get job result",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/job-results/123456789",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"job-results",
-						"123456789"
-					]
+			"name": "v2",
+			"item": [
+				{
+					"name": "Post new job result",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"result\": \"SUCCESS\", \"build\": 10}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/job-results/v2/123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"job-results",
+								"v2",
+								"123456789"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get job result",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/job-results/v2/123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"job-results",
+								"v2",
+								"123456789"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "Clean cache",

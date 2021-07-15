@@ -40,7 +40,7 @@ public class JobResultsService {
      * @param hash job hash
      * @return cached job result
      */
-    public JobResult getResult(String hash) {
+    public JobResult getJobResult(String hash) {
         return cache.containsKey(hash) ? cache.get(hash) : JobResult.EMPTY_RESULT;
     }
 
@@ -49,7 +49,7 @@ public class JobResultsService {
      * @param hash job hash
      * @param result job result
      */
-    public void addOrUpdateResult(String hash, JobResult result) {
+    public void addOrUpdateJobResult(String hash, JobResult result) {
         cache.put(hash, result);
     }
 

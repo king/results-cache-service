@@ -26,6 +26,7 @@ import java.net.URL;
 public class Application {
 
     public static final String JOB_RESULTS_TAG = "job-results";
+    public static final String JOB_RESULTS_V2_TAG = "job-results v2";
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -55,6 +56,7 @@ public class Application {
                 .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag(JOB_RESULTS_TAG, "Job Results API"));
+                .tags(new Tag(JOB_RESULTS_TAG, "Job Results API version 1"),
+                        new Tag(JOB_RESULTS_V2_TAG, "Job Results API version 2"));
     }
 }
