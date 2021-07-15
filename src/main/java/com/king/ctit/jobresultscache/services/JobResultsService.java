@@ -18,8 +18,8 @@ import javax.annotation.PreDestroy;
 @Service
 public class JobResultsService {
 
-    private CacheManager cacheManager;
-    private Cache<String, JobResult> cache;
+    private final CacheManager cacheManager;
+    private final Cache<String, JobResult> cache;
 
     @Autowired
     public JobResultsService(CacheManager cacheManager) {
@@ -36,21 +36,20 @@ public class JobResultsService {
     }
 
     /**
-     * Gets a cached result from the cache. Returns NOT_BUILD if not found.
+     * Gets a cached job result from the cache. Returns {@link JobResult#EMPTY_RESULT} if not found.
      * @param hash job hash
-     * @return cached result from the cache. NOT_BUILD if not found.
+     * @return cached job result
      */
     public JobResult getJobResult(String hash) {
-        JobResult jobResult = cache.containsKey(hash) ? cache.get(hash) : JobResult.NOT_BUILT;
-        return jobResult;
+        return cache.containsKey(hash) ? cache.get(hash) : JobResult.EMPTY_RESULT;
     }
 
     /**
-     * Adds or Updates a results for a job
+     * Adds or Updates a cached job result under a job hash
      * @param hash job hash
-     * @param result job esult
+     * @param result job result
      */
-    public void addJobResult(String hash, JobResult result) {
+    public void addOrUpdateJobResult(String hash, JobResult result) {
         cache.put(hash, result);
     }
 

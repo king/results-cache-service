@@ -4,7 +4,7 @@
 
 package com.king.ctit.jobresultscache.ehcache;
 
-import com.king.ctit.jobresultscache.dto.JobResult;
+import com.king.ctit.jobresultscache.dto.Result;
 import org.ehcache.event.CacheEvent;
 import org.ehcache.event.CacheEventListener;
 import org.slf4j.Logger;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Cache Event Listener to write log traces
  */
-public class EventLogger implements CacheEventListener<String, JobResult> {
+public class EventLogger implements CacheEventListener<String, Result> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventLogger.class);
 
@@ -22,7 +22,7 @@ public class EventLogger implements CacheEventListener<String, JobResult> {
      * @param event event
      */
     @Override
-    public void onEvent(CacheEvent<? extends String, ? extends JobResult> event) {
+    public void onEvent(CacheEvent<? extends String, ? extends Result> event) {
         LOGGER.info("Event [{}] Key: '{}', old value: '{}', new value: '{}'", event.getType(), event.getKey(), event.getOldValue(), event.getNewValue());
     }
 }

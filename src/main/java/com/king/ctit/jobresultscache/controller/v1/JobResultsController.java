@@ -2,9 +2,11 @@
 // https://github.com/king/results-cache-service
 // License: Apache 2.0, https://raw.githubusercontent.com/king/results-cache-service/master/LICENSE-APACHE
 
-package com.king.ctit.jobresultscache.controller;
+package com.king.ctit.jobresultscache.controller.v1;
 
+import com.king.ctit.jobresultscache.Application;
 import com.king.ctit.jobresultscache.dto.JobResult;
+import com.king.ctit.jobresultscache.dto.Result;
 import com.king.ctit.jobresultscache.services.JobResultsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,7 @@ import io.swagger.annotations.ApiParam;
 /**
  * Job Results Controller. It manages the HTTP Rest layer
  */
-@Api(value = "job-results", description = "Job Results API")
+@Api(tags = {Application.JOB_RESULTS_TAG})
 @RestController
 @RequestMapping("/job-results")
 public class JobResultsController {
@@ -42,27 +44,34 @@ public class JobResultsController {
      * Gets a cached result from the cache
      * @param hash job hash
      * @return a jenkins job cached result
+     * @deprecated Use version 2
      */
-    @ApiOperation("Gets a cached result from the cache")
+    @ApiOperation("Gets a cached job result from the cache. Deprecated API: use version 2")
     @GetMapping(value = "/{hash}", produces = MediaType.TEXT_PLAIN_VALUE)
+    @Deprecated
+    @SuppressWarnings("java:S1133")
     public @ResponseBody String getCachedResult(@ApiParam(value = "Job hash", required = true) @PathVariable("hash") String hash) {
         logger.debug("Asking for hash: {}", hash);
-        JobResult result = service.getJobResult(hash);
-        logger.debug("Result for hash: {} is {}", hash, result);
-        return result.name();
+        JobResult jobResult = service.getJobResult(hash);
+        logger.debug("Job result for hash: {} is {}", hash, jobResult);
+        return jobResult.getResult().name();
     }
 
     /**
      * Adds or Updates a job result in the cache
      * @param hash job hash
      * @param result job result
+     * @deprecated Use version 2
      */
-    @ApiOperation("Adds or Updates a result in the cache")
+    @ApiOperation("Adds or Updates a job result in the cache. Deprecated API: use version 2")
     @PostMapping(value = "/{hash}/{result}")
+    @Deprecated
+    @SuppressWarnings("java:S1133")
     public void addOrUpdateResult(@ApiParam(value = "Job hash to identify it in the cache", required = true) @PathVariable("hash") String hash,
-                                  @ApiParam(value = "Job result to add or update", required = true, allowableValues = "SUCCESS, UNSTABLE, FAILURE, NOT_BUILT, ABORTED") @PathVariable("result") JobResult result) {
-        logger.debug("Adding result {} to hash {}", result.name(), hash);
-        service.addJobResult(hash, result);
+                                  @ApiParam(value = "Job result to add or update", required = true, allowableValues = "SUCCESS, UNSTABLE, FAILURE, NOT_BUILT, ABORTED") @PathVariable("result") Result result) {
+        JobResult jobResult = new JobResult(result, -1);
+        logger.debug("Adding cached job result {} to hash {}", jobResult, hash);
+        service.addOrUpdateJobResult(hash, jobResult);
     }
 
     /**

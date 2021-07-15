@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -23,6 +24,9 @@ import java.net.URL;
 @SpringBootApplication
 @EnableSwagger2
 public class Application {
+
+    public static final String JOB_RESULTS_TAG = "job-results";
+    public static final String JOB_RESULTS_V2_TAG = "job-results v2";
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -51,6 +55,8 @@ public class Application {
                 .select()
                 .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .tags(new Tag(JOB_RESULTS_TAG, "Job Results API version 1"),
+                        new Tag(JOB_RESULTS_V2_TAG, "Job Results API version 2"));
     }
 }
