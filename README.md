@@ -18,11 +18,11 @@ Implemented API
 
 Latest release
 --------------
-2.0.0 - Every cached result now also contains build number.
+1.1.0 - Every cached result now also contains build number.
 
 Version history
 ===============
-Version 2.0.0 (July 15, 2021)
+Version 1.1.0 (July 15, 2021)
 ---------------------------
 * Every cached result now also contains build number.
 * Deprecated version 1 operations.
